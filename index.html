@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <title>Vue SSR Demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="To embrace the future">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.8/lib/theme-chalk/index.css">
+    <link rel="dns-prefetch" href="//server.takken.cn">
+    <link rel="manifest" href="/manifest.json">
+    <% if (process.env.NODE_ENV === 'production') { %>
+      <!-- Deployed environment -->
+      <script>document.write('<script src="/config/index.js?t=' + new Date().getTime() + '"><\/script>');</script>
+    <% } else { %>
+      <!-- Local environment -->
+      <link rel="shortcut icon" type="image/x-icon" href="/static/img/logo.ico">
+      <script src="/static/config/index.js"></script>
+    <% } %>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      (function() {
+        if('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
+      })()
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
